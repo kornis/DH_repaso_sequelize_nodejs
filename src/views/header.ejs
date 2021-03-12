@@ -1,0 +1,15 @@
+<div class="row d-flex justify-content-between align-items-center">
+    <div class="col">
+        <a href="/">Mi página</a>
+    </div>
+    <div class="col d-flex justify-content-end">
+        <% if(typeof userLogged=='undefined' ){ %>
+            <a href="/login" style="margin-right: 10px;">Iniciar sesión</a>
+            <a href="/registro">Registrarse</a>
+         <% } else { %>
+            <a href="/perfil" style="margin-right: 10px;">Ver perfil</a>
+            <a href="/logout">Cerrar sesión</a>
+        <% } %>
+    </div>
+</div>
+<hr>
