@@ -10,10 +10,10 @@
 </head>
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <% for(let i = 0; i< productos.length; i++) { %>
-                    <div class="card" style="width: 18rem;">
+        <div class="row justify-content-between">
+            <% for(let i = 0; i< productos.length; i++) { %>
+                <div class="col">
+                    <div class="card" style="width: 18rem; margin:auto">
                         <img class="card-img-top" src="/images/<%=  productos[i].images.length > 0 ? productos[i].images[0].path : 'imagendefecto.jpg' %>" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title"><%= productos[i].title %></h5>
@@ -21,8 +21,8 @@
                             <a href="/products/<%= productos[i].id %>" class="btn btn-primary">Ver producto</a>
                         </div>
                     </div>
+                </div>
                <% } %>
-            </div>
         </div>
     </div>
 </body>

@@ -37,7 +37,7 @@
             <div class="row justify-content-evenly mt-3">
                 <% producto.images.forEach(imagen => { %>
                     <div class="col">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card" style="width: 18rem; margin:auto">
                         <img class="card-img-top" src="/images/<%= imagen.path %>" alt="Card image cap">
                         <div class="card-body">
                             <a href="/products/borrar-imagen/<%= imagen.id %>?product=<%= producto.id %>" class="btn btn-danger">Borrar imagen</a>
