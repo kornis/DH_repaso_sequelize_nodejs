@@ -8,19 +8,39 @@ module.exports = {
         db.users.findOne({
             where: {
                 email: req.body.email
-            }
+            },
+            include: db.cart
         }).then((user) => {
-            if(user && user.password == req.body.password){
-                req.session.user = {
-                    name: user.name,
-                    avatar: user.avatar,
-                    id: user.id
-                }
-                return res.redirect('/perfil')
-            }else {
-                return res.send('El usuario y/o contraseña son incorrectos...')
+                if(user && user.password == req.body.password){
+
+                    let cart = user.carts.find(cart => cart.status == true)
+                    if (cart) {
+                        req.session.user = {
+                            name: user.name,
+                            avatar: user.avatar,
+                            id: user.id,
+                            id_cart: cart.id
+                        }
+                        return res.redirect('/perfil')
+                    }else{
+                    db.cart.create({
+                        status: 1,
+                        id_user: user.id
+                    }).then(cart => {
+                        req.session.user = {
+                            name: user.name,
+                            avatar: user.avatar,
+                            id: user.id,
+                            id_cart: cart.id
+                        }
+                        return res.redirect('/perfil')
+                    })
+            }
+            }else{
+                    return res.send('El usuario y/o contraseña son incorrectos...')
             }
         })
+       
     },
 
     registerForm: (req, res) => {

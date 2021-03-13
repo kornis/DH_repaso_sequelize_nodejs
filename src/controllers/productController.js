@@ -30,7 +30,7 @@ module.exports = {
           })
          arrayImages.push(promesa);
       }
-      Promise.all(arrayImages).then(response => res.json(response))
+      Promise.all(arrayImages).then(response => res.redirect('/products'))
         //return res.json(product);
     })
 },
@@ -69,7 +69,45 @@ deleteImage: (req, res) => {
     const id = req.params.id;
     db.images.destroy({ where: { id: id }})
     .then(() => res.redirect('/products/'+ req.query.product))
-}
+},
 
+    addToCart: (req, res) => {
+        const product_id = req.params.id;
+        db.cart.findByPk(req.session.user.id_cart, {include: db.products})
+        .then(cart => {
+            let prod = cart.products.find(p => p.id == product_id)
+            if(prod){
+                db.cartProduct.findOne({where:{id_product: product_id, id_cart: req.session.user.id_cart}})
+                .then(product => {
+                    db.cartProduct.update({
+                        cant: product.cant + 2
+                    },
+                    {
+                        where:{
+                            id_cart: req.session.user.id_cart,
+                            id_product: product_id
+                        }
+                    }).then(() =>{
+                        return res.redirect('/products')
+                    })
 
+                })
+            }else{
+                cart.addProduct(product_id, { through: {cant: 1}})
+                .then(() =>{
+                    return res.redirect('/products')
+                })
+            }
+        })
+    },
+
+    cart: (req, res) => {
+        db.cart.findOne({where:
+        {
+            id: req.session.user.id_cart
+        },
+        include: db.products
+    }).then(cart => res.render('cart',{cart}))
+
+    }
 }

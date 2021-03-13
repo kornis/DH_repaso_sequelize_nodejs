@@ -6,24 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <title>Productos</title>
+    <title>Carrito</title>
 </head>
 <body>
     <div class="container">
         <div class="row justify-content-between">
-            <% for(let i = 0; i< productos.length; i++) { %>
+            <% for(let i=0; i< cart.products.length; i++) { %>
                 <div class="col">
                     <div class="card" style="width: 18rem; margin:auto">
-                        <img class="card-img-top" src="/images/<%=  productos[i].images.length > 0 ? productos[i].images[0].path : 'imagendefecto.jpg' %>" alt="Card image cap">
+                   
                         <div class="card-body">
-                            <h5 class="card-title"><%= productos[i].title %></h5>
-                            <p class="card-text"><%= productos[i].description %></p>
-                            <a href="/products/<%= productos[i].id %>" class="btn btn-primary">Ver producto</a>
-                            <a href="/products/cart/<%= productos[i].id %>" class="btn btn-primary">Agregar al carrito</a>
+                            <h5 class="card-title">
+                                <%= cart.products[i].title %>
+                            </h5>
+                            <p class="card-text">
+                                <%= cart.products[i].description %>
+                            </p>
+                           <span>Cantidad: <%= cart.products[i].cartProduct.cant %></span>
                         </div>
                     </div>
                 </div>
-               <% } %>
+                <% } %>
         </div>
     </div>
 </body>

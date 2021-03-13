@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
         User.associate = (models) => {
             User.belongsTo(models.images, {
                 foreignKey: "id_imagen",
+            }),
+
+            User.hasMany(models.cart, {
+                foreignKey: 'id_user'
             })
         }
 
