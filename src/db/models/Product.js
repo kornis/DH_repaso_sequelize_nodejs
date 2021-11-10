@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
             Product.belongsToMany(models.cart, {
                 foreignKey: "id_product",
                 otherKey: 'id_cart',
+                // hacemos la relación llamando al modelo creado de la tabla intermedia para poder obtener el campo extra
                 through: models.cartProduct
             })
     }
