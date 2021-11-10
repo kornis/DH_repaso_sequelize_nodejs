@@ -7,6 +7,8 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+CREATE DATABASE IF NOT EXISTS 'prueba_sequelize';
+use 'prueba_sequelize';
 
 CREATE TABLE `cart` (
   `id` bigint(20) UNSIGNED NOT NULL,
